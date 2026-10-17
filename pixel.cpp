@@ -13,7 +13,7 @@ void Pixel::print_rgb() {
          << "Blue: " << (double)this->blue << std::endl;
 }
 
-void Pixel::update_rgb(int r, int g, int b) {
+void Pixel::add_to_rgb(int r, int g, int b) {
     
     if (r + (int)red > 255) {
         red = 255;
@@ -40,6 +40,12 @@ void Pixel::update_rgb(int r, int g, int b) {
     }
 }
 
+void Pixel::factor_rgb(float r, float g, float b) {
+    red *= r;
+    green *= g;
+    blue *= b;
+}
+
 
 unsigned char Pixel::getRed() {
     return red;
@@ -52,3 +58,25 @@ unsigned char Pixel::getGreen() {
 unsigned char Pixel::getBlue() {
     return blue;
 }
+
+void Pixel::set_black() {
+    this->upload_rgb(0, 0, 0);
+    this->is_black = true;
+    this->is_white = false;
+}
+
+void Pixel::set_white() {
+    this->upload_rgb(255, 255, 255);
+    this->is_black = false;
+    this->is_white = true;
+}
+
+bool Pixel::check_black() {
+    return is_black ? true : false; 
+}
+
+bool Pixel::check_white() {
+    return is_white ? true : false; 
+}
+
+

@@ -6,7 +6,7 @@
 #define STB_IMAGE_WRITE_IMPLEMENTATION
 #include "libraries/stb_image_write.h"
 
-Image download_into_array(string path_name) {
+Image download_into_array(string path_name, bool &check) {
 
     int width, height, channels;
 
@@ -16,6 +16,7 @@ Image download_into_array(string path_name) {
 
     if (img == nullptr) {
         cout << "Download FAILED!" << endl;
+        check = false;
         return Image({}, {0,0}, 0);
     }
 
@@ -32,6 +33,7 @@ Image download_into_array(string path_name) {
 
     Dimensions dims = {height, width};
 
+    check = true;
     return Image(field, dims, channels);
 }
 
@@ -69,7 +71,7 @@ void red_filter(Image &image, float rate) {
 
     for (int i = 0; i < image.dimensions.height; i++) {
         for (int j = 0; j < image.dimensions.width; j++) {
-            image.pixel_field[i][j].update_rgb(20 * rate, -50 * rate, -50 * rate);
+            image.pixel_field[i][j].add_to_rgb(20 * rate, -50 * rate, -50 * rate);
         }
     }
 }
@@ -84,7 +86,7 @@ void green_filter(Image &image, float rate) {
 
     for (int i = 0; i < image.dimensions.height; i++) {
         for (int j = 0; j < image.dimensions.width; j++) {
-            image.pixel_field[i][j].update_rgb(-50 * rate, 20 * rate, -50 * rate);
+            image.pixel_field[i][j].add_to_rgb(-50 * rate, 20 * rate, -50 * rate);
         }
     }
 }
@@ -99,7 +101,33 @@ void blue_filter(Image &image, float rate) {
 
     for (int i = 0; i < image.dimensions.height; i++) {
         for (int j = 0; j < image.dimensions.width; j++) {
-            image.pixel_field[i][j].update_rgb(-50 * rate, -50 * rate, 20 * rate);
+            image.pixel_field[i][j].add_to_rgb(-50 * rate, -50 * rate, 20 * rate);
+        }
+    }
+}
+
+void gray_filter(Image &image) {
+
+    for (int i = 0; i < image.dimensions.height; i++) {
+        for (int j = 0; j < image.dimensions.width; j++) {
+            Pixel temp = image.pixel_field[i][j];
+            unsigned char gray = temp.getRed() * 0.299 + temp.getGreen() * 0.587 + temp.getBlue() * 0.114;
+            image.pixel_field[i][j].upload_rgb(gray, gray, gray);
+        }
+    }
+}
+
+void pure_black_n_white(Image &image) {
+
+    for (int i = 0; i < image.dimensions.height; i++) {
+        for (int j = 0; j < image.dimensions.width; j++) {
+            Pixel &temp = image.pixel_field[i][j];
+            unsigned char brightness = temp.getRed() * 0.299 + temp.getGreen() * 0.587 + temp.getBlue() * 0.114;
+            if (brightness < 128) {
+                temp.set_black();
+            } else {
+                temp.set_white();
+            }
         }
     }
 }
