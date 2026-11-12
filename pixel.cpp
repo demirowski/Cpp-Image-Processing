@@ -1,6 +1,12 @@
 #include "pixel.h"
 #include <iostream>
 
+Pixel::Pixel() 
+: red(0), green(0), blue(0), is_black(true), is_white(false)
+{}
+
+Pixel::~Pixel() {}
+
 void Pixel::upload_rgb(unsigned char red, unsigned char green, unsigned char blue) {
     this->red = red;
     this->green = green;

@@ -1,10 +1,7 @@
 #pragma once
 #include <vector>
 #include "pixel.h"
-
-struct Dimensions {
-    int height, width;
-};
+#include "structs.h"
 
 class Image {
 

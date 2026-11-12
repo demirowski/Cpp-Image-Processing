@@ -17,11 +17,14 @@ class Pixel {
         unsigned char getGreen();
         unsigned char getBlue();
 
-        void set_black();
-        void set_white();
+        void set_black(); // sets singular pixel to pure black
+        void set_white(); // sets singular pixel to pure white
 
         bool check_black();
         bool check_white();
+
+        Pixel();
+        ~Pixel();
 };
 
 #endif
