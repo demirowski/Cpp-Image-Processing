@@ -1,6 +1,10 @@
 #include "pixel.h"
 #include <iostream>
 
+Pixel::Pixel(Coordinates cd) 
+: red(0), green(0), blue(0), is_black(true), is_white(false), coordinates(cd)
+{}
+
 Pixel::Pixel() 
 : red(0), green(0), blue(0), is_black(true), is_white(false)
 {}
@@ -83,6 +87,27 @@ bool Pixel::check_black() {
 
 bool Pixel::check_white() {
     return is_white ? true : false; 
+}
+
+bool Pixel::is_in(Obstacle& obs) {
+    switch (obs.getShape()) {
+        case CIRCLE:
+        if (sqrt(pow(obs.getCoordinates().y - coordinates.y, 2) + pow(obs.getCoordinates().x - coordinates.x, 2)) <= obs.getRadius()) {
+            return true;
+        }
+        break;
+        case RECTANGLE:
+        if (abs(coordinates.y - obs.getCoordinates().y) <= obs.getRadius() && abs(coordinates.x - obs.getCoordinates().x) <= obs.getRadius()) {
+            return true;
+        }
+        break;
+    }
+    return false;
+}
+
+void Pixel::setCoordinates(int y, int x) {
+    coordinates.y = y;
+    coordinates.x = x;
 }
 
 

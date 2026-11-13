@@ -1,17 +1,26 @@
 #pragma once
 
-struct Color {
-    float red;
-    float green;
-    float blue;
+// IMPORTANT!!!
+// Project-wide convention: always (y / height / rows) first, then (x / width / columns).
+// This applies to Coordinates, Dimensions and any {a, b} initialization.
+
+enum Color {
+    RED,
+    GREEN,
+    BLUE
 };
 
 struct Coordinates {
-    int x;
     int y;
+    int x;
 };
 
 struct Dimensions {
     int height;
     int width;
+};
+
+enum Shapes {
+    CIRCLE,
+    RECTANGLE
 };

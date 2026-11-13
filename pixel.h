@@ -1,11 +1,15 @@
 #ifndef PIXEL_H
 #define PIXEL_H
 
+#include "structs.h"
+#include "obstacle.h"
+
 class Pixel {
 
     private:
         unsigned char red, green, blue;
         bool is_black, is_white;
+        Coordinates coordinates;
 
     public:
         void upload_rgb(unsigned char red, unsigned char green, unsigned char blue);
@@ -23,6 +27,10 @@ class Pixel {
         bool check_black();
         bool check_white();
 
+        bool is_in(Obstacle& shape);
+        void setCoordinates(int y, int x);
+
+        Pixel(Coordinates cd);
         Pixel();
         ~Pixel();
 };

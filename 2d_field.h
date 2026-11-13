@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include "pixel.h"
+#include <cmath>
 
 using namespace std;
 
@@ -19,11 +20,12 @@ class Field {
     
     public:
 
-        void print_image(string name);
+        void print_image(string name = "result.png");
         void add_light_source(Coordinates cd, Color cl, float strength);
-        void add_obstacle(Coordinates cd, Shapes cp, int radius, Color cl);
+        void add_obstacle(Coordinates cd, Shapes sp, int radius, Color cl); 
 
-
+        
+        Dimensions getDimensions();
 
         Field(Color cl, Dimensions dm);
         Field(Dimensions dm);

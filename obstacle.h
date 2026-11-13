@@ -1,12 +1,6 @@
 #pragma once
 #include "structs.h"
 
-enum Shapes {
-    Circle,
-    Rectangle
-};
-
-
 
 class Obstacle {
 
@@ -17,7 +11,12 @@ class Obstacle {
         int radius;
 
     public:
-        Obstacle(Shapes shape, int radius, Color color);
+
+        Coordinates getCoordinates();
+        Shapes getShape();
+        int getRadius();
+
+        Obstacle(Coordinates coordinates, Shapes shape, int radius, Color color);
         ~Obstacle();
 
 
