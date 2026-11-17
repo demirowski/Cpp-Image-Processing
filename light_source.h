@@ -1,16 +1,15 @@
 #pragma once
-#include "structs.h"
+#include "object.h"
 
-class LSource {
+class LSource : public Object {
     
     private:
-        Coordinates coordinate;
         float strength;
         // float attenuation_rate;
-        Color color;
     
     public:
-        LSource(Coordinates coordinate, float strength);
+
+        LSource(Coordinates coordinate, Shapes sh, Color cl, float strength);
         ~LSource();
 
 };

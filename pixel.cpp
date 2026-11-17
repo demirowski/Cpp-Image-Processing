@@ -23,7 +23,7 @@ void Pixel::print_rgb() {
          << "Blue: " << (double)this->blue << std::endl;
 }
 
-void Pixel::add_to_rgb(int r, int g, int b) {
+void Pixel::add_to_rgb(uint8_t r, uint8_t g, uint8_t b) {
     
     if (r + (int)red > 255) {
         red = 255;
@@ -48,6 +48,20 @@ void Pixel::add_to_rgb(int r, int g, int b) {
     } else {
         blue += b;
     }
+}
+
+void Pixel::add_to_rgb(Color cl) {
+    uint8_t r = cl.r;
+    uint8_t g = cl.g;
+    uint8_t b = cl.b;
+
+    add_to_rgb(r, g, b);
+}
+
+void Pixel::set_rgb(Color cl) {
+    red = cl.r;
+    green = cl.g;
+    blue = cl.b;
 }
 
 void Pixel::factor_rgb(float r, float g, float b) {
@@ -89,15 +103,15 @@ bool Pixel::check_white() {
     return is_white ? true : false; 
 }
 
-bool Pixel::is_in(Obstacle& obs) {
-    switch (obs.getShape()) {
+bool Pixel::is_in(Object& obj) {
+    switch (obj.getShape()) {
         case CIRCLE:
-        if (sqrt(pow(obs.getCoordinates().y - coordinates.y, 2) + pow(obs.getCoordinates().x - coordinates.x, 2)) <= obs.getRadius()) {
+        if (sqrt(pow(obj.getCoordinates().y - coordinates.y, 2) + pow(obj.getCoordinates().x - coordinates.x, 2)) <= obj.getRadius()) {
             return true;
         }
         break;
         case RECTANGLE:
-        if (abs(coordinates.y - obs.getCoordinates().y) <= obs.getRadius() && abs(coordinates.x - obs.getCoordinates().x) <= obs.getRadius()) {
+        if (abs(coordinates.y - obj.getCoordinates().y) <= obj.getRadius() && abs(coordinates.x - obj.getCoordinates().x) <= obj.getRadius()) {
             return true;
         }
         break;

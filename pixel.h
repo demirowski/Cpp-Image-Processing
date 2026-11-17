@@ -2,7 +2,7 @@
 #define PIXEL_H
 
 #include "structs.h"
-#include "obstacle.h"
+#include "object.h"
 
 class Pixel {
 
@@ -13,7 +13,11 @@ class Pixel {
 
     public:
         void upload_rgb(unsigned char red, unsigned char green, unsigned char blue);
-        void add_to_rgb(int r, int g, int b);
+        void add_to_rgb(uint8_t r, uint8_t g, uint8_t b);
+        void add_to_rgb(Color cl);
+
+        void set_rgb(Color cl);
+
         void factor_rgb(float r, float g, float b);
         void print_rgb();
 
@@ -27,7 +31,7 @@ class Pixel {
         bool check_black();
         bool check_white();
 
-        bool is_in(Obstacle& shape);
+        bool is_in(Object& shape);
         void setCoordinates(int y, int x);
 
         Pixel(Coordinates cd);

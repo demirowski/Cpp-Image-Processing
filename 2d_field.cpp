@@ -31,16 +31,29 @@ Field::~Field()
 
 void Field::add_obstacle(Coordinates cd, Shapes sp, int radius, Color cl) {
     Obstacle obs(cd, sp, radius, cl);
-    obstacles.push_back(obs);
+    obstacles.push_back(make_shared<Obstacle>(obs));
 
     for (int i = 0; i < dimensions.height; ++i) {
         for (int j = 0; j < dimensions.width; ++j) {
             if (pixel_field[i][j].is_in(obs)) {
-                pixel_field[i][j].add_to_rgb(255, 0, 0);
+                pixel_field[i][j].set_rgb(obs.getColor());
             }
         }
     }
 
+}
+
+void Field::add_light_source(Coordinates cd, Color cl, float strength) {
+    LSource ls(cd, CIRCLE, cl, strength);
+    sources.push_back(make_shared<LSource>(ls));
+
+    // for (int i = 0; i < dimensions.height; ++i) {
+    //     for (int j = 0; j < dimensions.width; ++j) {
+    //         if (pixel_field[i][j].is_in(obs)) {
+    //             pixel_field[i][j].add_to_rgb(255, 0, 0);
+    //         }
+    //     }
+    // }
 }
 
 
@@ -71,4 +84,12 @@ void Field::print_image(string name) {
 
 Dimensions Field::getDimensions() {
     return dimensions;
+}
+
+vector<shared_ptr<LSource>>& Field::getLights() {
+    return sources;
+}
+
+vector<shared_ptr<Obstacle>>& Field::getObstacles() {
+    return obstacles;
 }

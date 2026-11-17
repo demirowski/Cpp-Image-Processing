@@ -14,10 +14,10 @@ int main() {
     string answer;
     cin >> answer;
     if (answer == "c") {
-        field.add_obstacle({field.getDimensions().height / 2, field.getDimensions().width / 2}, CIRCLE, 40, RED);
+        field.add_obstacle({field.getDimensions().height / 2, field.getDimensions().width / 2}, CIRCLE, 40, Color::RED);
         field.print_image();
     } else if (answer == "r") {
-        field.add_obstacle({field.getDimensions().height / 2, field.getDimensions().width / 2 + 50}, RECTANGLE, 40, BLUE);
+        field.add_obstacle({field.getDimensions().height / 2, field.getDimensions().width / 2 + 50}, RECTANGLE, 40, Color::BLUE);
         field.print_image();
     }
 
