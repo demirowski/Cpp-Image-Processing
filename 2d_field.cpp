@@ -10,6 +10,7 @@ Field::Field(Color cl, Dimensions dm)
         pixel_field[i].resize(dm.width);
         for (int j = 0; j < dm.width; ++j) {
             pixel_field[i][j].setCoordinates(i, j);
+            pixel_field[i][j].set_rgb(bg_color);
         }
     }
 }
@@ -29,7 +30,7 @@ Field::Field(Dimensions dm)
 Field::~Field()
 {}
 
-void Field::add_obstacle(Coordinates cd, Shapes sp, int radius, Color cl) {
+void Field::add_obstacle(Vector2d cd, Shapes sp, int radius, Color cl) {
     Obstacle obs(cd, sp, radius, cl);
     obstacles.push_back(make_shared<Obstacle>(obs));
 
@@ -41,10 +42,13 @@ void Field::add_obstacle(Coordinates cd, Shapes sp, int radius, Color cl) {
             }
         }
     }
-
 }
 
-void Field::add_light_source(Coordinates cd, Color cl, float strength) {
+void Field::move_lsource(int place, Vector2d displacement) {
+    
+}
+
+void Field::add_light_source(Vector2d cd, Color cl, float strength) {
     LSource ls(cd, CIRCLE, cl, strength);
     sources.push_back(make_shared<LSource>(ls));
 
@@ -57,31 +61,24 @@ void Field::add_light_source(Coordinates cd, Color cl, float strength) {
     }
 }
 
+void Field::move_obstacle(int place, Vector2d displacement) {
 
-
-
-void Field::print_image(string name) {
-
-    int height = dimensions.height;
-    int width = dimensions.width;
-    int channels = 3;
-
-    vector<unsigned char> data(height * width * channels);
-
-    for (int i = 0; i < height; i++) {
-        for (int j = 0; j < width; j++) {
-
-            int index = ((i * width) + j) * channels;
-
-            data[index    ] = pixel_field[i][j].getRed();
-            data[index + 1] = pixel_field[i][j].getGreen();
-            data[index + 2] = pixel_field[i][j].getBlue();
+    Vector2d cords = obstacles[place]->getCoordinates();
+    double radius = obstacles[place]->getRadius();
+    for (int i = cords.y - radius; i < cords.y + radius; i++) {
+        for (int j = cords.x - radius; j < cords.x + radius; j++) {
+            pixel_field[i][j].set_off_obstacle();
+            pixel_field[i][j].set_rgb(bg_color);
+            Vector2d new_vector = Vector2d{(double)i, (double)j} + displacement;
+            pixel_field[new_vector.y][new_vector.x].set_on_obstacle(); 
+            pixel_field[new_vector.y][new_vector.x].set_rgb(obstacles[place]->getColor()); 
         }
     }
 
+    obstacles[place]->moveCoordinates(displacement);
 
-    stbi_write_png(name.c_str(), width, height, channels, data.data(), width * channels);
 }
+
 
 Dimensions Field::getDimensions() {
     return dimensions;
@@ -97,4 +94,8 @@ vector<shared_ptr<Obstacle>>& Field::getObstacles() {
 
 vector<vector<Pixel>>& Field::getPixelField() {
     return pixel_field;
+}
+
+Color Field::getColor() {
+    return bg_color;
 }

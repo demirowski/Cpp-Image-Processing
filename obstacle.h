@@ -9,7 +9,8 @@ class Obstacle : public Object {
 
     public:
 
-        Obstacle(Coordinates coordinates, Shapes shape, int radius, Color color);
+        Obstacle(Vector2d coordinates, Shapes shape, int radius, Color color);
+        Obstacle();
         ~Obstacle();
 
 

@@ -12,7 +12,7 @@ class Field {
     private:
         vector<shared_ptr<LSource>> sources;
         vector<shared_ptr<Obstacle>> obstacles;
-        Color bg_color;
+        Color bg_color = Color::BLACK;
         Dimensions dimensions;
 
         vector<vector<Pixel>> pixel_field;
@@ -20,15 +20,18 @@ class Field {
     
     public:
 
-        void print_image(string name = "result.png");
-        void add_light_source(Coordinates cd, Color cl, float strength);
-        void add_obstacle(Coordinates cd, Shapes sp, int radius, Color cl); 
+        void add_light_source(Vector2d cd, Color cl, float strength);
+        void move_lsource(int place, Vector2d displacement);
+
+        void add_obstacle(Vector2d cd, Shapes sp, int radius, Color cl); 
+        void move_obstacle(int place, Vector2d displacement);
 
 
         vector<shared_ptr<LSource>>& getLights();
         vector<shared_ptr<Obstacle>>& getObstacles();
         Dimensions getDimensions();
         vector<vector<Pixel>>& getPixelField();
+        Color getColor();
 
         Field(Color cl, Dimensions dm);
         Field(Dimensions dm);

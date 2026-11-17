@@ -13,17 +13,13 @@ struct Color {
     static const Color RED;
     static const Color GREEN;
     static const Color BLUE;
+    static const Color LIGHT_BLUE;
     static const Color LIGHT;
+    static const Color BLACK;
 };
 
 Color operator*(const Color& cl, double scalar);
 Color operator*(double scalar, const Color& cl);
-
-
-struct Coordinates {
-    double y;
-    double x;
-};
 
 struct Vector2d {
     double y;
@@ -31,6 +27,13 @@ struct Vector2d {
 };
 
 Vector2d operator+(const Vector2d& v1, const Vector2d& v2);
+Vector2d operator-(const Vector2d& v1, const Vector2d& v2);
+Vector2d operator*(const Vector2d& v1, const double scalar);
+Vector2d operator*(const double scalar, const Vector2d& v1);
+Vector2d operator/(const Vector2d& v, double divider);
+
+double dotProduct(const Vector2d& v1, const Vector2d& v2);
+double distanceV(Vector2d v1, Vector2d v2);
 
 struct Dimensions {
     int height;

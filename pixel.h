@@ -9,7 +9,7 @@ class Pixel {
     private:
         unsigned char red, green, blue;
         bool is_black, is_white;
-        Coordinates coordinates;
+        Vector2d coordinates;
         bool on_obstacle = false;
 
     public:
@@ -30,6 +30,7 @@ class Pixel {
         void set_black(); // sets singular pixel to pure black
         void set_white(); // sets singular pixel to pure white
         void set_on_obstacle();
+        void set_off_obstacle();
         bool get_OnObstacle();
 
         bool check_black();
@@ -38,7 +39,7 @@ class Pixel {
         bool is_in(Object& shape);
         void setCoordinates(int y, int x);
 
-        Pixel(Coordinates cd);
+        Pixel(Vector2d cd);
         Pixel();
         ~Pixel();
 };

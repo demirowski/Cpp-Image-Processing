@@ -1,7 +1,7 @@
 #include "pixel.h"
 #include <iostream>
 
-Pixel::Pixel(Coordinates cd) 
+Pixel::Pixel(Vector2d cd) 
 : red(0), green(0), blue(0), is_black(true), is_white(false), coordinates(cd)
 {}
 
@@ -99,6 +99,10 @@ void Pixel::set_on_obstacle() {
     on_obstacle = true;
 }
 
+void Pixel::set_off_obstacle() {
+    on_obstacle = false;
+}
+
 bool Pixel::get_OnObstacle() {
     return on_obstacle;
 }
@@ -118,7 +122,7 @@ bool Pixel::is_in(Object& obj) {
             return true;
         }
         break;
-        case RECTANGLE:
+        case SQUARE:
         if (abs(coordinates.y - obj.getCoordinates().y) <= obj.getRadius() && abs(coordinates.x - obj.getCoordinates().x) <= obj.getRadius()) {
             return true;
         }
