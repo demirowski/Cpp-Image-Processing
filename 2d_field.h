@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 #include "pixel.h"
-#include <cmath>
+#include "math.h"
 
 using namespace std;
 
@@ -28,6 +28,7 @@ class Field {
         vector<shared_ptr<LSource>>& getLights();
         vector<shared_ptr<Obstacle>>& getObstacles();
         Dimensions getDimensions();
+        vector<vector<Pixel>>& getPixelField();
 
         Field(Color cl, Dimensions dm);
         Field(Dimensions dm);

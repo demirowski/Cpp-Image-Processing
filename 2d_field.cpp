@@ -47,13 +47,13 @@ void Field::add_light_source(Coordinates cd, Color cl, float strength) {
     LSource ls(cd, CIRCLE, cl, strength);
     sources.push_back(make_shared<LSource>(ls));
 
-    // for (int i = 0; i < dimensions.height; ++i) {
-    //     for (int j = 0; j < dimensions.width; ++j) {
-    //         if (pixel_field[i][j].is_in(obs)) {
-    //             pixel_field[i][j].add_to_rgb(255, 0, 0);
-    //         }
-    //     }
-    // }
+    for (int i = 0; i < dimensions.height; ++i) {
+        for (int j = 0; j < dimensions.width; ++j) {
+            if (pixel_field[i][j].is_in(ls)) {
+                pixel_field[i][j].set_rgb(ls.getColor());
+            }
+        }
+    }
 }
 
 
@@ -92,4 +92,8 @@ vector<shared_ptr<LSource>>& Field::getLights() {
 
 vector<shared_ptr<Obstacle>>& Field::getObstacles() {
     return obstacles;
+}
+
+vector<vector<Pixel>>& Field::getPixelField() {
+    return pixel_field;
 }
