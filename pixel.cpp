@@ -95,6 +95,14 @@ void Pixel::set_white() {
     this->is_white = true;
 }
 
+void Pixel::set_on_obstacle() {
+    on_obstacle = true;
+}
+
+bool Pixel::get_OnObstacle() {
+    return on_obstacle;
+}
+
 bool Pixel::check_black() {
     return is_black ? true : false; 
 }

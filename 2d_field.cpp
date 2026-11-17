@@ -37,6 +37,7 @@ void Field::add_obstacle(Coordinates cd, Shapes sp, int radius, Color cl) {
         for (int j = 0; j < dimensions.width; ++j) {
             if (pixel_field[i][j].is_in(obs)) {
                 pixel_field[i][j].set_rgb(obs.getColor());
+                pixel_field[i][j].set_on_obstacle();
             }
         }
     }

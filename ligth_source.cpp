@@ -6,3 +6,7 @@ LSource::LSource(Coordinates coordinate, Shapes sh, Color cl, float strength)
 }
 
 LSource::~LSource() {}
+
+double LSource::getStrength() {
+    return strength;
+}

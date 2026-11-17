@@ -4,10 +4,13 @@
 class LSource : public Object {
     
     private:
-        float strength;
+        double strength;
+        double range;
         // float attenuation_rate;
     
     public:
+
+        double getStrength();
 
         LSource(Coordinates coordinate, Shapes sh, Color cl, float strength);
         ~LSource();

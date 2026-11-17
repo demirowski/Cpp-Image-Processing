@@ -10,6 +10,7 @@ class Pixel {
         unsigned char red, green, blue;
         bool is_black, is_white;
         Coordinates coordinates;
+        bool on_obstacle = false;
 
     public:
         void upload_rgb(unsigned char red, unsigned char green, unsigned char blue);
@@ -19,6 +20,7 @@ class Pixel {
         void set_rgb(Color cl);
 
         void factor_rgb(float r, float g, float b);
+
         void print_rgb();
 
         unsigned char getRed();
@@ -27,6 +29,8 @@ class Pixel {
 
         void set_black(); // sets singular pixel to pure black
         void set_white(); // sets singular pixel to pure white
+        void set_on_obstacle();
+        bool get_OnObstacle();
 
         bool check_black();
         bool check_white();

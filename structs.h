@@ -21,14 +21,16 @@ Color operator*(double scalar, const Color& cl);
 
 
 struct Coordinates {
-    int y;
-    int x;
+    double y;
+    double x;
 };
 
 struct Vector2d {
     double y;
     double x;
 };
+
+Vector2d operator+(const Vector2d& v1, const Vector2d& v2);
 
 struct Dimensions {
     int height;
@@ -37,5 +39,5 @@ struct Dimensions {
 
 enum Shapes {
     CIRCLE,
-    RECTANGLE
+    SQUARE
 };

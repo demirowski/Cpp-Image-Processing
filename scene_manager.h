@@ -15,7 +15,11 @@ class SceneManager {
 
     public:
 
-        void draw_ray(Coordinates cd, double f);
+        shared_ptr<Obstacle>& findShape(Vector2d cords);
+        double SceneManager::calculate_angle(shared_ptr<Obstacle>& obs);
+
+        void draw_ray_fake(Coordinates cd, double f);
+        void draw_ray(Coordinates cd, double angle, double strength);
         void turn_on_all();
         void turn_on(shared_ptr<LSource> ls);
 
